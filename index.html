@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday, Priscilla!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            /* Your custom background goes here */
+            background-color: #89CFF0;
+            background-image: url('whiteflower.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        /* THE GLASS FRAME */
+        .frame {
+            background-color: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            padding: 40px 30px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.15),
+                inset 0 1px 1px rgba(255, 255, 255, 0.5);
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #1a3c5a;
+            margin-top: 0;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .instructions {
+            color: #1a3c5a;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* The single flower */
+        #flowerSection {
+            margin-top: 20px;
+        }
+
+        .singleFlower {
+            font-size: 120px;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.3s, opacity 0.3s;
+            filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.25));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .singleFlower:hover {
+            transform: scale(1.15);
+        }
+
+        .singleFlower.picked {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* The big "Happy Birthday" */
+        #greeting {
+            display: none;
+            font-size: 42px;
+            color: #1a3c5a;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            animation: pop 0.8s;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* THE ONE BOX with the picture AND all messages together */
+        #messageBox {
+            display: none;
+            margin: 25px auto;
+            max-width: 550px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            animation: fadeIn 1s;
+        }
+
+        #messageBox img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        #messageBox p {
+            font-size: 20px;
+            line-height: 1.7;
+            color: #1a3c5a;
+            margin: 10px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- THE GLASS FRAME -->
+    <div class="frame">
+
+        <h1>🌸 For Priscilla 🌸</h1>
+        <p class="instructions">Click the flower...</p>
+
+        <!-- The ONE flower -->
+        <div id="flowerSection">
+            <span class="singleFlower" id="theFlower" onclick="pickFlower()"> 🌸 </span>
+        </div>
+
+        <!-- The big greeting -->
+        <div id="greeting">💙Happy Birthday my Love💙</div>
+
+        <!-- ONE box with the PICTURE + all messages -->
+        <div id="messageBox">
+    <img src="priscilla.jpeg" alt="Priscilla">
+    <p>💙 I hope today is as beautiful as you are. 💙</p>
+    <p>💙 I love you more than I can put into words. 💙</p>
+    <p>💙 I love the way you make me smile and laugh. 💙</p>
+    <p>💙 I love that you know me better than anyone else. 💙</p>
+    <p>💙 Happy 20th birthday, my love. Have an amazing day. 💙</p>
+</div>
+       
+
+    </div>
+    <!-- END OF FRAME -->
+
+    <!-- The Song -->
+    <audio id="bgMusic" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let musicStarted = false;
+        function startMusic() {
+            if (!musicStarted) {
+                document.getElementById('bgMusic').play();
+                musicStarted = true;
+            }
+        }
+
+        function pickFlower() {
+            startMusic();
+            document.getElementById('theFlower').classList.add('picked');
+            
+            // Show "Happy Birthday" first
+            setTimeout(function() {
+                document.getElementById('greeting').style.display = 'block';
+            }, 300);
+            
+            // Then show the picture + all messages
+            setTimeout(function() {
+                document.getElementById('messageBox').style.display = 'block';
+            }, 1500);
+        }
+    </script>
+
+</body>
+</html>
